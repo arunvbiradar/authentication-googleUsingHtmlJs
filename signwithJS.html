@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign with JS</title>
+
+  <!-- required -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="jwt-decode.js"></script>
+</head>
+<body>
+  <script>
+    const signInConfig = {
+      client_id: '388475514954-09tsmd0ft75n749p6h83v3mmn1iorn57.apps.googleusercontent.com',
+      callback: handleCredentialResponse
+    }
+
+    window.onload = function () {
+      google.accounts.id.initialize(signInConfig);
+      google.accounts.id.prompt();
+    };
+
+    
+    function handleCredentialResponse(response) {
+      console.log(response)
+      // decodeJwtResponse() is a custom function defined by you
+      // to decode the credential response.
+      const responsePayload = jwt_decode(response.credential);
+
+
+      console.log("ID: " + responsePayload.sub);
+      console.log('Full Name: ' + responsePayload.name);
+      console.log('Given Name: ' + responsePayload.given_name);
+      console.log('Family Name: ' + responsePayload.family_name);
+      console.log("Image URL: " + responsePayload.picture);
+      console.log("Email: " + responsePayload.email);
+    }
+  </script>
+</body>
+</html>
