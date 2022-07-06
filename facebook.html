@@ -12,13 +12,13 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v14.0" nonce="5s7RsnXn"></script>
 
 
-    <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
 
     
 <script>
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '1502880196798765',
+        appId      : '562263912239200',
         cookie     : true,
         xfbml      : true,
         version    : 'v14.0'
@@ -35,6 +35,13 @@
        js.src = "https://connect.facebook.net/en_US/sdk.js";
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            console.log(response);
+            statusChangeCallback(response);
+        });
+    }
   </script>
 </body>
 </html>
